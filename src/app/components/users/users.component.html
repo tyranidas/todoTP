@@ -1,0 +1,13 @@
+<div>
+   
+        <select 
+        name="userSelected"
+        id="userSelected" 
+        class="form-control"
+       [(ngModel)]="userSelected"
+        >
+            <option class="user" *ngFor="let user of users$|async" value={{user.id}}>{{user.nom}} {{user.prenom}}</option>
+        </select>
+     
+</div>
+
