@@ -35,6 +35,7 @@ export class TodoService {
     return this._http
     .post<Todo>(this._baseUrl, todo)
     .pipe(
+      tap(()=> console.log("todo")),
       tap(todo => this.todos$.value.push(todo))
     );
     

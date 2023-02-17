@@ -1,41 +1,30 @@
-<app-users></app-users>
+<app-users (userSelected)="userSelected=$event"></app-users>
 
 <h1>Ma liste de tâche</h1>
 
-<div class="todos">
-
+<div class="todos" *ngIf="userSelected.nom">
+    <h2>Tâche de {{userSelected.prenom}} {{userSelected.nom}}</h2>
     <div class="form-add-todo">
-      <label for="catSelected">Nouvelle tâche : </label>
-      <input type="text" [(ngModel)]="toCreate.text">
-      <label for="catSelected">Sa catégorie: </label>
-      <input type="text" [(ngModel)]="toCreate.cat">
-      <button (click)="createTodo()">Enregistrer</button>
+        
+       
+        <label for="catSelected">Nouvelle tâche : </label>
+        <input  type="text" [(ngModel)]="toCreate.text" >
+        <label for="catSelected">Sa catégorie: </label>
+        <input type="text" [(ngModel)]="toCreate.cat">
+        <button (click)="createTodo()">Enregistrer</button>
     </div>
-    <div class="form-add-todo">
-      <label for="catSelected">Catégorie : </label>
-      <select 
-      name="catSelected"
-      id="catSelected" 
-      class="form-control"
-     [(ngModel)]="catSelected"
-      >   <option class="cat"
-              value=""
-              selected>
-              Toutes
-          </option>
-
-          <option class="cat"
-           *ngFor="let todo of todos$|async"
-            value={{todo.cat}}>{{todo.cat}}</option>
-      </select>
-    </div>
+    <app-cat (catSelected)="catSelected=$event"></app-cat>
+    
 </div>
 
 <div  class="todos" >
     <h2>A Faire</h2>
     <div *ngFor="let todo of todos$ |async">
       
-            <div class="todo" *ngIf='!todo.done && ((todo.cat==catSelected) || !catSelected)'>
+            <div class="todo" *ngIf='!todo.done 
+            && (((todo.cat==catSelected.intitule) || catSelected.intitule=="toutes")
+           &&(userSelected.id == todo.userId) || todo.isEditable)
+            '>
                 <h3
                   *ngIf="!todo.isEditable "
                   [class.done]="todo.done">
@@ -45,6 +34,10 @@
                   *ngIf="todo.isEditable"
                   type="text"
                   [(ngModel)]="todo.text">  
+                  <input
+                  *ngIf="todo.isEditable"
+                  type="text"
+                  [(ngModel)]="todo.cat">  
                 <div class="buttons">
                   <button
                     class="bt-check"
@@ -68,7 +61,10 @@
 <div  class="todos">
     <h2>Fait</h2>
     <div *ngFor="let todo of todos$ |async">
-        <div class="todo" *ngIf='todo.done && ((todo.cat==catSelected) || !catSelected)'>
+        <div class="todo" *ngIf='todo.done 
+        && (((todo.cat==catSelected.intitule) || catSelected.intitule=="toutes")
+           &&(userSelected.id == todo.userId) || todo.isEditable)
+            '>
             <h3
               *ngIf="!todo.isEditable"
               [class.done]="todo.done">
@@ -78,6 +74,10 @@
               *ngIf="todo.isEditable"
               type="text"
               [(ngModel)]="todo.text">  
+              <input
+              *ngIf="todo.isEditable"
+              type="text"
+              [(ngModel)]="todo.cat">  
 
             <div class="buttons">
               <button

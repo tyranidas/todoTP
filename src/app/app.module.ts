@@ -7,12 +7,14 @@ import { TodosComponent } from './components/todos/todos.component';
 import { UsersComponent } from './components/users/users.component';
 import { AppRoutingModule } from 'app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { CatComponent } from './components/cat/cat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
     UsersComponent,
+    CatComponent,
   ],
   imports: [
     BrowserModule,

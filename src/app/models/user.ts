@@ -1,5 +1,6 @@
 export class User {
-    public id? : string
+    public id? : number
     public nom?:string
     public prenom?: string
+    
 }

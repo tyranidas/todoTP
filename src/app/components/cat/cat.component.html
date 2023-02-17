@@ -1,0 +1,11 @@
+
+<h3>Liste des catégories</h3>
+<ul class="list-group" >
+   
+    <li
+      (click)="catSelected.emit(cat)"
+      *ngFor="let cat of cat$|async"
+      class="list-group-item d-flex justify-content-between">
+      {{cat.intitule}} 
+    </li>
+</ul>

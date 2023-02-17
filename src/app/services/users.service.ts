@@ -20,7 +20,7 @@ export class UsersService {
       .pipe(
       
         tap(users => this.users$.next(users)),
-        tap(()=>console.log(this.users$.value)),
+       
       );
   }
 
